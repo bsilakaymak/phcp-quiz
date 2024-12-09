@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import questionsData from './questions.json';
 import ProgressBar from './ProgressBar';
 import SingleQuestion from './SingleQuestion';
+import {CHAPTERNAMES} from "./chapter-name-mapping"
 
 const Quiz = ({ isMixed = false }) => {
   const { chapter } = useParams();
@@ -68,7 +69,7 @@ const Quiz = ({ isMixed = false }) => {
 
   return (
     <div>
-      <h2>{isMixed ? 'Mixed Questions' : `Quiz: ${chapter}`}</h2>
+      <h2>{isMixed ? 'Mixed Questions' : `Practice Questions: ${CHAPTERNAMES[`${chapter}`]}`}</h2>
       {currentIndex < allQuestions.length ? (
         <div>
           <ProgressBar

@@ -15,7 +15,8 @@ const App = () => {
       <div>
         <h1>PHCP Practice questions</h1>
         <nav>
-          <Link to="/">Select Chapter</Link> | <Link to="/mixed">Mixed Questions</Link> | <Link to="/general-review">Review</Link> | <Link to="/register">Register to save your progress</Link>
+          <Link to="/">Select Chapter</Link> | <Link to="/mixed">Mixed Questions</Link> | <Link to="/general-review">Review</Link> 
+        {/* | <Link to="/register">Register to save your progress</Link> */}
         </nav>
         <Routes>
           <Route path="/" element={<ChapterSelection />} />

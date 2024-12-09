@@ -1,6 +1,7 @@
 import React from 'react';
 import questionsData from "./questions.json"
 import { Link } from 'react-router-dom';
+import {CHAPTERNAMES} from './chapter-name-mapping';
 const Review = () => {
     
     const chapters = Object.keys(questionsData.questions_per_chapter);
@@ -11,7 +12,7 @@ const Review = () => {
            <ul>
         {chapters.map((chapter) => (
           <li key={chapter}>
-            <Link to={`/review/${chapter}`}>{chapter}</Link>
+            <Link to={`/review/${chapter}`}>{CHAPTERNAMES[`${chapter}`]}</Link>
           </li>
         ))}
       </ul>
