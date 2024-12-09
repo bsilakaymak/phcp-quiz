@@ -1,0 +1,47 @@
+# Node modules
+/node_modules/
+
+# Logs
+*.log
+logs/
+
+# Debug and IDE files
+.vscode/
+.idea/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Dependency directories
+jspm_packages/
+
+# Build output
+/dist/
+/build/
+/coverage/
+
+# npm package-lock
+package-lock.json
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.swp
+*.swo
+
+# Docker-related files
+.docker/
+
+# .env files for Docker
+.env.docker
+
+# Yarn lockfile (if using Yarn)
+yarn.lock
+
+# Other IDE or editor configurations
+.vscode/
+.idea/
