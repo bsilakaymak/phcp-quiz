@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import questionsData from './questions.json';
 import ProgressBar from './ProgressBar';
 import SingleQuestion from './SingleQuestion';
-import {CHAPTERNAMES} from "./chapter-name-mapping"
+import { CHAPTERNAMES } from './chapter-name-mapping';
 
 const Quiz = ({ isMixed = false }) => {
   const { chapter } = useParams();
@@ -13,54 +13,74 @@ const Quiz = ({ isMixed = false }) => {
 
   const savedProgress = JSON.parse(localStorage.getItem(localStorageKey));
 
-  const [currentIndex, setCurrentIndex] = useState(savedProgress ? savedProgress.currentIndex : 0);
-  const [userAnswers, setUserAnswers] = useState(savedProgress ? savedProgress.userAnswers : []);
-  const [wrongAnswers, setWrongAnswers] = useState(savedProgress ? savedProgress.wrongAnswers : []);
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [showFeedback, setShowFeedback] = useState(false);
-
   const allQuestions = isMixed
     ? questionsData.questions_mixed
     : questionsData.questions_per_chapter[chapter] || [];
 
-  const currentQuestion = allQuestions[currentIndex];
-
-  useEffect(() => {
-    if (savedProgress) {
-      setCurrentIndex(savedProgress.currentIndex);
-      setUserAnswers(savedProgress.userAnswers);
-      setWrongAnswers(savedProgress.wrongAnswers);
-    }
-  }, [localStorageKey]);
-
+  const [userAnswers, setUserAnswers] = useState(savedProgress ? savedProgress.userAnswers : []);
+  const [wrongAnswers, setWrongAnswers] = useState(savedProgress ? savedProgress.wrongAnswers : []);
+ 
   useEffect(() => {
     localStorage.setItem(
       localStorageKey,
       JSON.stringify({
-        currentIndex,
         userAnswers,
         wrongAnswers,
       })
     );
-  }, [currentIndex, userAnswers, wrongAnswers, localStorageKey]);
+  }, [userAnswers, wrongAnswers, localStorageKey]);
+  
+  
+  const [unansweredQuestions, setUnansweredQuestions] = useState(
+    allQuestions.filter(
+      (q) => !savedProgress?.userAnswers.includes(q.id) // Filter out answered questions
+    )
+  );
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [showFeedback, setShowFeedback] = useState(false);
+
+  // Get the current question based on the first unanswered question
+  const currentQuestion = unansweredQuestions[0];
+
+
+  useEffect(() => {
+    if (savedProgress) {
+      setUserAnswers(savedProgress.userAnswers);
+      setWrongAnswers(savedProgress.wrongAnswers);
+      setUnansweredQuestions(
+        allQuestions.filter(
+          (q) => !savedProgress.userAnswers.includes(q.id) // Filter based on question IDs
+        )
+      );
+    }
+  }, [localStorageKey]);
+
+  
 
   const handleAnswer = (optionKey) => {
     const correct = optionKey === currentQuestion.correct_answer;
     setSelectedOption(optionKey);
     setShowFeedback(true);
 
-    const updatedAnswers = [...userAnswers, { ...currentQuestion, isCorrect: correct }];
+    // Track the question ID in userAnswers
+    const updatedAnswers = [...userAnswers, currentQuestion.id];
     setUserAnswers(updatedAnswers);
 
+    // Add the question ID to wrongAnswers if incorrect
     if (!correct) {
-      setWrongAnswers([...wrongAnswers, currentQuestion]);
+      setWrongAnswers([...wrongAnswers, currentQuestion.id]);
     }
 
+    // Transition to the next question
     setTimeout(() => {
-      setSelectedOption(null);
-      setShowFeedback(false);
-      setCurrentIndex(currentIndex + 1);
-    }, 1500);
+      setShowFeedback(false); // Clear feedback
+      setSelectedOption(null); // Clear selected option
+
+      // Remove the answered question from unansweredQuestions
+      setUnansweredQuestions((prevUnanswered) =>
+        prevUnanswered.filter((q) => q.id !== currentQuestion.id)
+      );
+    }, 1500); // Adjust timeout as needed
   };
 
   const answeredQuestions = userAnswers.length;
@@ -70,13 +90,13 @@ const Quiz = ({ isMixed = false }) => {
   return (
     <div>
       <h2>{isMixed ? 'Mixed Questions' : `Practice Questions: ${CHAPTERNAMES[`${chapter}`]}`}</h2>
-      {currentIndex < allQuestions.length ? (
+      {unansweredQuestions.length > 0 ? (
         <div>
           <ProgressBar
-            progress={Math.round(percentageAnswered)}
             correctAnswers={userAnswers.length - wrongAnswers.length}
-            wrongAnswers={wrongAnswers.length}
             totalQuestions={totalQuestions}
+            wrongAnswers={wrongAnswers.length}
+            progress={Math.round(percentageAnswered)}
           />
           <SingleQuestion
             question={currentQuestion}
@@ -89,7 +109,7 @@ const Quiz = ({ isMixed = false }) => {
         <div>
           <h3>Quiz Completed!</h3>
           <p>
-            You answered {userAnswers.filter((a) => a.isCorrect).length}/{allQuestions.length} questions correctly.
+            You answered {userAnswers.filter((id) => allQuestions.find(q => q.id === id && q.correct_answer === id)).length}/{totalQuestions} questions correctly.
           </p>
         </div>
       )}
@@ -98,3 +118,4 @@ const Quiz = ({ isMixed = false }) => {
 };
 
 export default Quiz;
+

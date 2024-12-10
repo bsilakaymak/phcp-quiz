@@ -7,8 +7,8 @@ const Review = () => {
     const chapters = Object.keys(questionsData.questions_per_chapter);
 
     return (
-        <div>
-           Review per chapter
+        <div style={{textAlign:'left'}}>
+           <strong>Review per chapter</strong>
            <ul>
         {chapters.map((chapter) => (
           <li key={chapter}>
@@ -16,10 +16,10 @@ const Review = () => {
           </li>
         ))}
       </ul>
-      Review mixed questions
+      <strong>Review mixed questions</strong>
       <ul>
           <li>
-            <Link to={`/review/mixed`}>mixed</Link>
+            <Link to={`/review/mixed`}>Mixed Questions</Link>
           </li>
       
       </ul>

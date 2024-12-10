@@ -7,7 +7,7 @@ const ChapterSelection = () => {
   const chapters = Object.keys(questionsData.questions_per_chapter);
 
   return (
-    <div>
+    <div style={{textAlign:'left'}}>
       <h2>Select a Chapter</h2>
       <ul>
         {chapters.map((chapter) => (
