@@ -11,7 +11,7 @@ const SingleQuestion = ({ question, handleAnswer, showFeedback, selectedOption }
               onClick={() => handleAnswer(key)}
               style={{
                 width: '100%',
-                border:"1px solid",
+                border:"1px solid black",
                 backgroundColor:
                   showFeedback && key === question.correct_answer
                     ? 'green'
