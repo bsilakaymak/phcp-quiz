@@ -3,7 +3,7 @@ import React from 'react';
 const ProgressBar = ({ progress, correctAnswers, wrongAnswers, totalQuestions }) => {
   const correctPercentage = (correctAnswers / totalQuestions) * 100;
   const wrongPercentage = (wrongAnswers / totalQuestions) * 100;
-console.log(correctAnswers, totalQuestions)
+
   return (
     <div style={{ margin: '20px 0', width: '100%' }}>
       {/* Container */}

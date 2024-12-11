@@ -10,4 +10,7 @@ export const CHAPTERNAMES = {
   "chp-10-nh": "CHAPTER 10 Personality Disorders",
   "chp-12-nh": "CHAPTER 12 Eating Disorders",
   "chp-15-nh": "CHAPTER 15 Health Psychology",
+  "chp-3-hp": "CHAPTER 3 Health Behaviours",
+  "chp-4-hp": "CHAPTER 3 Health-promoting Behaviours",
+  "chp-5-hp": "CHAPTER 3 Health-compromising Behaviours",
 };

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import questionsData from './questions.json';
-import ProgressBar from './ProgressBar';
-import SingleQuestion from './SingleQuestion';
-import { CHAPTERNAMES } from './chapter-name-mapping';
+import questionsData from '../data/questions.json';
+import ProgressBar from '../components/ProgressBar';
+import SingleQuestion from '../components/SingleQuestion';
+import { CHAPTERNAMES } from '../data/chapter-name-mapping';
+import Container from '../components/Container';
 
 const ChapterReview = ({ isMixed = false }) => {
   const { chapter } = useParams();
@@ -21,11 +22,6 @@ const ChapterReview = ({ isMixed = false }) => {
     const [userAnswers] = useState(savedProgress ? savedProgress.userAnswers : []);
     const [selectedOption, setSelectedOption] = useState(null);
   const [showFeedback, setShowFeedback] = useState(false);
-
-
-  console.log("filtered", allQuestions.filter(
-    (q) => savedProgress?.wrongAnswers.includes(q.id)))
-  // Get the current question based on the first unanswered question
 
   useEffect(() => {
     if (savedProgress) {
@@ -56,32 +52,31 @@ const ChapterReview = ({ isMixed = false }) => {
 
     if (correct) {
         setWrongAnswers((prevWrongAnswers) =>
-          prevWrongAnswers.filter((id) => id !== currentQuestion.id) // Remove the correct question from wrongAnswers
+          prevWrongAnswers.filter((id) => id !== currentQuestion.id) 
         );
       } 
-    // Transition to the next question
     setTimeout(() => {
-      setShowFeedback(false); // Clear feedback
-      setSelectedOption(null); // Clear selected option
-    }, 1500); // Adjust timeout as needed
+      setShowFeedback(false); 
+      setSelectedOption(null); 
+    }, 1500); 
   };
 
-  const answeredQuestions = userAnswers.length;
+  const answeredQuestions = userAnswers?.length;
   const totalQuestions = allQuestions.length;
   const percentageAnswered = (answeredQuestions / totalQuestions) * 100;
 
   return (
-    <div>
+    <Container>
       <h2>{isMixed ? 'Mixed Questions Review' : `Chapter Review: ${CHAPTERNAMES[`${chapter}`]}`}</h2>
       <ul>
         <li>Total Questions: <strong>{allQuestions.length}</strong></li>
-        <li>Answered Questions: <strong>{userAnswers.length}</strong></li>
-        <li>Correct Answers: <strong>{userAnswers.length - wrongAnswers.length}</strong></li>
-        <li>Wrong Answers: <strong>{wrongAnswers.length}</strong></li>
+        <li>Answered Questions: <strong>{userAnswers?.length}</strong></li>
+        <li>Correct Answers: <strong>{userAnswers?.length - wrongAnswers.length}</strong></li>
+        <li>Wrong Answers: <strong>{wrongAnswers?.length}</strong></li>
       </ul>
       
         <ProgressBar
-          correctAnswers={userAnswers.length - wrongAnswers.length}
+          correctAnswers={userAnswers?.length - wrongAnswers?.length}
           totalQuestions={allQuestions.length}
           wrongAnswers={wrongAnswers.length}
           progress={Math.round(percentageAnswered)}
@@ -99,11 +94,11 @@ const ChapterReview = ({ isMixed = false }) => {
         <div>
           <h3>Nothing to review...</h3>
           <p>
-            You answered {userAnswers.length - wrongAnswers.length}/{totalQuestions} questions correctly.
+            You answered {userAnswers?.length - wrongAnswers?.length}/{totalQuestions} questions correctly.
           </p>
         </div>
       )}
-    </div>
+    </Container>
   );
 };
 

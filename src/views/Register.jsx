@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
-import { UserContext } from './context/UserContext';
-
+import { UserContext } from '../context/UserContext';
+// not in use atm
 const Register = () => {
   const { user, login, logout, error, loading } = useContext(UserContext);
   const [username, setUsername] = useState('');

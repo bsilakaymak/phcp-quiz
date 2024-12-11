@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-
+//to be used later
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
@@ -11,10 +11,9 @@ const UserProvider = ({ children }) => {
     currentQuestionIndex: 0,
     answeredQuestions: [],
     wrongAnswers: [],
-  }); // Track progress
+  }); 
   const [intervalId, setIntervalId] = useState(null);
 
-  // Check if user is logged in when the app starts
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser) {
@@ -24,7 +23,6 @@ const UserProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  // Periodically save progress to localStorage
   useEffect(() => {
     if (user && !intervalId) {
       const id = setInterval(() => {
