@@ -2,7 +2,7 @@ import React from 'react';
 
 const SingleQuestion = ({ question, handleAnswer, showFeedback, selectedOption }) => {
   return (
-    <div>
+    <div >
       <p style={{ fontSize: 24, fontWeight: 700 }}>{question.question}</p>
       <ul style={{ listStyle: 'none' }}>
         {Object.entries(question.options).map(([key, option]) => (
