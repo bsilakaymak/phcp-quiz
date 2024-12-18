@@ -11,6 +11,11 @@ export const CHAPTERNAMES = {
   "chp-12-nh": "CHAPTER 12 Eating Disorders",
   "chp-15-nh": "CHAPTER 15 Health Psychology",
   "chp-3-hp": "CHAPTER 3 Health Behaviours",
-  "chp-4-hp": "CHAPTER 3 Health-promoting Behaviours",
-  "chp-5-hp": "CHAPTER 3 Health-compromising Behaviours",
+  "chp-4-hp": "CHAPTER 4 Health-promoting Behaviours",
+  "chp-5-hp": "CHAPTER 5 Health-compromising Behaviours",
+  "chp-11-pp": "Traits and Taxonomies",
+  "chp-12-pp": "Biological Domain(Personality)",
+  "chp-13-pp": "Physiological Domain(Personality)",
+  "chp-14-pp": "Intrapsychic Domain(Personality)",
+  "chp-15-pp": "Cognitive Domain(Personality)",
 };
