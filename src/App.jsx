@@ -22,9 +22,9 @@ const App = () => {
     <UserProvider>
     <Router>
       <div>
-        <h1>PHCP Practice questions</h1>
+        <h1>Psychology practice questions</h1>
         <nav>
-          <Link to="/">Select Chapter</Link> | <Link to="/mixed">Mixed Questions</Link> | <Link to="/general-review">Review</Link> 
+          <Link to="/">Select Chapter</Link> | <Link to="/general-review">Review</Link> 
         {/* | <Link to="/register">Register to save your progress</Link> */}
 
         </nav>
@@ -34,9 +34,7 @@ const App = () => {
           <Route path="/general-review" element={<Review />} />
           <Route path="/register" element={<Register />} />
           <Route path="/review/:chapter" element={<ChapterReview />} />
-          <Route path="/review/mixed" element={<ChapterReview isMixed />} />
           <Route path="/quiz/:chapter" element={<Quiz />} />
-          <Route path="/mixed" element={<Quiz isMixed />} />
         </Routes>
 
         <div><button style={{ padding:"8px", background: "none", border: "1px solid red", color: "red" }} onClick={handleReset}>RESET PROGRESS</button></div>

@@ -18,13 +18,6 @@ const Review = () => {
           </li>
         ))}
       </ul>
-      <strong>Review mixed questions</strong>
-      <ul>
-          <li>
-            <Link to={`/review/mixed`}>Mixed Questions</Link>
-          </li>
-      
-      </ul>
         </div>      
       </Container>
 
