@@ -10,28 +10,22 @@ function generateUniqueId(questionText) {
     .slice(0, 10);
 }
 
-function addIdsToQuestions(data) {
-  data.questions_mixed = data.questions_mixed.map((question, index) => ({
-    ...question,
-    id: generateUniqueId(`${index}-${question.question}`),
-  }));
-
-  for (const chapter in data.questions_per_chapter) {
-    data.questions_per_chapter[chapter] = data.questions_per_chapter[
-      chapter
-    ].map((question, index) => ({
-      ...question,
-      id: generateUniqueId(`${chapter}-${index}-${question.question}`),
-    }));
+function addUniqueIds(questionsData) {
+  for (let chapter in questionsData["questions_per_chapter"]) {
+    questionsData["questions_per_chapter"][chapter].forEach((question) => {
+      question.id = generateUniqueId(question.question); // Add unique ID based on the question text
+    });
   }
 
-  return data;
+  // Return the modified data
+  return questionsData;
 }
 
-const updatedQuestionsData = addIdsToQuestions(questionsData);
+const updatedQuestionsData = addUniqueIds(questionsData);
+console.log(updatedQuestionsData);
 
 fs.writeFile(
-  "updated_questions_data.json",
+  "updated_questions_data_2.json",
   JSON.stringify(updatedQuestionsData, null, 2),
   (err) => {
     if (err) {
