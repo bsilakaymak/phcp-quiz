@@ -1,7 +1,15 @@
 export const CHAPTERNAMES = {
   "dep-mixed": "DEP Mixed",
+  "dep-mixed-v2": "DEP Mixed v2",
   "dep-week-1-chp-5": "DEP Week 1 Chapter 5",
   "dep-week-2-chp-3": "DEP Week 2 Chapter 3",
   "ecr-week-1-correlation": "ECR Week 1 Correlation",
   "sop-mixed": "SOP Mixed",
+  "ecr-w1": "ECR Week 1",
+  "ecr-w2": "ECR Week 2",
+  "ecr-w3": "ECR Week 3",
+  "ecr-w4": "ECR Week 4",
+  "ecr-w5": "ECR Week 5",
+  "ecr-w6": "ECR Week 6",
+  "ecr-w7": "ECR Week 7",
 };
